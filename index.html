@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .cart-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Shopping Cart</h1>
+    <div id="cartItems"></div>
+
+    <script>
+        const cart = [];
+
+        function addItems(item, price, quantity) {
+            const itemTotal = price * quantity;
+            const tax = 0.18;
+            const discount = 0.1;
+            const total = itemTotal + (itemTotal * tax) - (itemTotal * discount);
+            cart.push({ item, price, quantity, total });
+        }
+
+        addItems("apple", 20, 6);
+        addItems("double ka meetha", 100, 1);
+
+        const cartContainer = document.getElementById("cartItems");
+
+        for (let item of cart) {
+            const div = document.createElement("div");
+            div.classList.add("cart-item");
+            div.innerHTML = `
+                <p><strong>Item:</strong> ${item.item}</p>
+                <p><strong>Price:</strong> ₹${item.price}</p>
+                <p><strong>Quantity:</strong> ${item.quantity}</p>
+                <p><strong>Total:</strong> ₹${item.total.toFixed(2)}</p>
+            `;
+            cartContainer.appendChild(div);
+        }
+    </script>
+
+</body>
+</html>
